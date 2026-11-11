@@ -1,0 +1,22 @@
+# Virtual environments
+env/
+.venv/
+venv/
+
+# Secrets and passwords
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE settings
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+
+# API credentials
+client_secret.json
