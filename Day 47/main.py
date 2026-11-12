@@ -13,7 +13,7 @@ SENDER = os.getenv("ADMIN_MAIL")
 PASS = os.getenv("EMAIL_PASS")
 
 
-target_price = 100
+target_price = 150000
 
 headers = {
     "Accept-Language": "en-US,en;q=0.9",
@@ -33,29 +33,24 @@ html = response.text
 
 
 soup = BeautifulSoup(html, "html.parser")
-# section = soup.select("div div span")
 price_o = soup.find("span", class_="a-offscreen")
-print(price_o.get_text())
 price = price_o.getText().replace("NGN", "")
-print(price)
-# clean_price = float(price.replace('$', ''))
-# print(clean_price)
+price = round(float(price.replace(",", "")))
 
 
-# if clean_price < target_price:
-#     smtp_host = HOST
-#     smtp_port = PORT
-#     sender_mail = SENDER
-#     password = PASS
-#     # print(f"SMTP Host: {smtp_host}")
-#     # print(f"SMTP Port: {smtp_port}")
-#     with smtplib.SMTP(smtp_host, smtp_port) as connection:
-#         connection.starttls()
-#         connection.login(user=sender_mail, password=password)
-#         msg = EmailMessage()
-#         msg["Subject"] = "There is a reduction in price for this product"
-#         msg["From"] = sender_mail
-#         msg["To"] = "uakmail1307@gmail.com"
-#         msg.set_content(f"Instant Pot Duo Plus 9-in-1 Electric Pressure Cooker, Slow Cooker, Rice Cooker, Steamer, Sauté, Yogurt Maker, Warmer & Sterilizer, Includes App With Over 800 Recipes, Stainless Steel, 3 Quart is now {price_o.get_text()}")
-#         connection.send_message(msg)
-#         print("Success: Email sent!")
+if price < target_price:
+    smtp_host = HOST
+    smtp_port = PORT
+    sender_mail = SENDER
+    password = PASS
+
+    with smtplib.SMTP(smtp_host, smtp_port) as connection:
+        connection.starttls()
+        connection.login(user=sender_mail, password=password)
+        msg = EmailMessage()
+        msg["Subject"] = "There is a reduction in price for this product"
+        msg["From"] = sender_mail
+        msg["To"] = "uakmail1307@gmail.com"
+        msg.set_content(f"Instant Pot Duo Plus 9-in-1 Electric Pressure Cooker, Slow Cooker, Rice Cooker, Steamer, Sauté, Yogurt Maker, Warmer & Sterilizer, Includes App With Over 800 Recipes, Stainless Steel, 3 Quart is now {price_o.getText()}")
+        connection.send_message(msg)
+        print("Success: Email sent!")
