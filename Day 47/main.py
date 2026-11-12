@@ -11,6 +11,8 @@ HOST = os.getenv("SMTP_SERVER")
 PORT = os.getenv("SMTP_PORT")
 SENDER = os.getenv("ADMIN_MAIL")
 PASS = os.getenv("EMAIL_PASS")
+LINK = "https://www.amazon.com/dp/B075CYMYK6?lv=shuf&channelId=751&ref_=cm_sw_r_cp_ud_ct_FM9M699VKHTT47YD50Q6&plpRedirect=mhFallback&th=1"
+
 
 
 target_price = 150000
@@ -18,15 +20,14 @@ target_price = 150000
 headers = {
     "Accept-Language": "en-US,en;q=0.9",
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:159.0) Gecko/20100101 Firefox/159.0",
-    "Sec-Fetch-Dest":	"document",
-    "Sec-Fetch-Mode":	"navigate",
-    "Sec-Fetch-Site":	"cross-site",
-    "Sec-Fetch-User":	"?1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "cross-site",
+    "Sec-Fetch-User": "?1",
     "Te":	"trailers",
-    "Upgrade-Insecure-Requests":	"1",
+    "Upgrade-Insecure-Requests": "1",
 }
 
-LINK = "https://www.amazon.com/dp/B075CYMYK6?lv=shuf&channelId=751&ref_=cm_sw_r_cp_ud_ct_FM9M699VKHTT47YD50Q6&plpRedirect=mhFallback&th=1"
 response = requests.get(url=LINK, headers=headers)
 html = response.text
 
